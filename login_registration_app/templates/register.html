@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">  
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 id="logo">petbook</h1>
+                <button class="btn btn-outline-primary btn-lg" onclick="window.location.href='/';">Login</button>
+            </div>
+            <div class="col">
+            <div class="form">
+            <form action="/register" method='post'> 
+                {% if messages %}
+                {% for message in messages %}
+                    <p class="messages">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+                {% csrf_token %}
+                <h1>Sign Up</h1>
+                <p>It's quick and easy.</p>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputEmail1" name='fname' placeholder="First name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputEmail1" name='lname' placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name='email' placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name='pw' placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name='confirmpw' placeholder="Confirm Password">
+                </div>
+                <button type="submit" class="btn btn-success" value='Register'>Sign Up</button>
+                <a href="/">Cancel</a>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="form">
+        <h1>Register</h1>
+        <form action="/register" method='post'>
+            {% csrf_token %}
+            <p>First Name: <input type='text' name='fname'></p>
+            <p>Last Name: <input type='text' name='lname'></p>
+            <p>Email: <input type='text' name='email'></p>
+            <p>Password: <input type='text' name='pw'></p>
+            <p>Confirm Password: <input type='text' name='confirmpw'></p>
+            <input type='submit' value='Register'>
+        </form>
+    </div> -->
+</body>
+</html>

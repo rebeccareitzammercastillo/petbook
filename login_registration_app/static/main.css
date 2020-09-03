@@ -1,0 +1,123 @@
+#main{
+    margin: 0 auto;
+    width: 100%;
+    background-color: #E9EBEE;
+}
+nav{
+    background-color: #3279EA;
+}
+#logo{
+    width: 34px;
+    height:39px;
+    background-color: white;
+    color: #3279EA;
+    margin: 5px 10px 0px 0px;
+    text-align: right;
+    font-weight: 500;
+    font-size: 30px;
+    padding-right: 2px;
+    border-radius: 3px;
+    vertical-align: bottom;
+}
+
+a.nav-right{
+    text-align: right;
+    width: 500px;
+}
+
+#message{
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#message p{
+    width: 100%;
+    background-color: #F5F6F7;
+    margin: 0;
+    padding: 3px 0 3px 7px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+#message textarea{
+    width:100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: #989BA1;
+    padding-left: 5px;
+}
+
+#message hr{
+    margin: 0;
+    padding:0;
+}
+
+#message input{
+    margin: 5px;
+}
+
+#comment{
+    width: 100%;
+    padding: 0 2px 0 2px;
+    margin-top: 12px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#comment hr{
+    margin: 0;
+    padding:0;
+}
+
+#comment textarea{
+    width:100%;
+    border: .5px solid #E9EBEE;;
+    margin: 0;
+    padding: 0;
+    color: #989BA1;
+    padding-left: 5px;
+}
+
+#comment ul li{
+    padding-left: 5px;
+    display: inline-block;
+    text-decoration: none;
+
+}
+
+#comment input{
+    margin: 5px;
+}
+
+.blurb{
+    background-color: #F2F3F5;
+    margin-top: 5px;
+    padding: 5px 0 5px 0;
+    width:80%;
+    height:30%;
+    border-radius: 10px;
+}
+
+.name{
+    color: #3279EA;
+    margin: 0;
+    padding:0;
+    font-weight: 500px;
+}
+
+.namedate{
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.space{
+    background-color: #E9EBEE;
+    width: 100%;
+    height: 10px;
+    padding: 0 5px 0 5px;
+}

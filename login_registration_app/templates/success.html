@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col collapse navbar-collapse" id="navbarSupportedContent">
+                    <a id="logo" href="#">p</a>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link nav-right" href="#">{{loggedinUser.first_name}} <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- {{allmessages}}
+    {{allcomments}} -->
+    <div id="main">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-6">
+                    <div id="message">
+                        <form action="/postmessage" method="post">
+                            {% csrf_token %}
+                            <p>Create Post</p>
+                            <textarea name="postmessage" rows="3" cols="100">What's on your mind, {{loggedinUser.first_name}}?</textarea>
+                            <hr>
+                            <input type="submit" class="btn btn-outline-primary btn-sm" value="Post a message">
+                        </form>
+                    </div>
+                    <div class="white">
+                    <div id="comment">
+                    {% for messageObj in allmessages%}
+                    <p class="name">{{messageObj.message_uploader.first_name}} {{messageObj.message_uploader.last_name}}</p>
+                    <p class="namedate">{{messageObj.created_at}}</p>
+                    <p>{{messageObj.message}}</p>
+                    <hr>
+                    {% for commentObj in allcomments %}
+                    {% if messageObj.id == commentObj.message_comment.id %}
+                    <ul>
+                        <!-- <li>{{commentObj.comment_uploader.first_name}} {{commentObj.created_at}} {{commentObj.message_comment.id}}<br>
+                            {{commentObj.comment}}</li> -->
+                        <div class="blurb">
+                        <li class="name">{{commentObj.comment_uploader.first_name}} {{commentObj.comment_uploader.last_name}}</li>
+                        <li>{{commentObj.comment}}</li>
+                        </div>
+                    </ul>
+                    {% endif %}
+                    {% endfor %}
+                
+                    <form action="/postcomment/{{messageObj.id}}" method="post">
+                        {% csrf_token %}
+                        <textarea name="postcomment" rows="2" cols="100" placeholder="Write a comment..."></textarea>
+                        <input type="submit" class="btn btn-outline-primary btn-sm" value="Comment">
+                    </form>
+                    <hr class="space">
+                    {% endfor %}
+                </div>
+                </div>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+    <!-- {% for commentObj in allcomments %}
+    <p>{{commentObj.comment_uploader.first_name}} {{commentObj.created_at}} {{commentObj.message_comment.id}}</p>
+    <p>{{commentObj.comment}}</p>
+    {% endfor %} -->
+</div>
+</body>
+
+</html>

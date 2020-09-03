@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">  
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            <h1 id="logo">petbook</h1>
+            <div class="card">
+                <div class="header">
+                    <button class="add" onclick="window.location.href='/newaccount';">+</button>
+                </div>
+                <a class="addaccount" href="/newaccount">Add Account</a>
+            </div>
+            </div>
+            <div class="col">
+            <div class="form">
+                <form action="/login" method='post'>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="message">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleInputEmail1" name='email' placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name='pw' placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Log In</button>
+                    </form>
+                    <hr>
+                    <a href="/newaccount" class="btn btn-success">Create New Account</a>
+                <!-- <form action="/login" method='post'>
+                    {% csrf_token %}
+                    <p>Email: <input type='text' name='email'></p>
+                    <p>Password: <input type='text' name='pw'></p>
+                    <input type='submit' value='Log In'>
+                    <a href="/newaccount">New Account</a>
+                </form> -->
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- {% if messages %}
+        {% for message in messages %}
+            <li>{{message}}</li>
+        {% endfor %}
+    {% endif %}
+    <div class="form">
+        <h1>Login</h1>
+        <form action="/login" method='post'>
+            {% csrf_token %}
+            <p>Email: <input type='text' name='email'></p>
+            <p>Password: <input type='text' name='pw'></p>
+            <input type='submit' value='Log In'>
+            <a href="/newaccount">New Account</a>
+        </form>
+    </div> -->
+    <footer>
+        <p>Copyright 2020</p>
+    </footer>
+</body>
+</html>
