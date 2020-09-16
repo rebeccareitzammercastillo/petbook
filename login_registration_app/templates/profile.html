@@ -1,63 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Newsfeed</title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
-
 <body>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a id="logo" href="/newsfeed">p</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form method="get" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search text" name="q" id="id_q" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link nav-right" href="/profile/{{loggedinUser.id}}">{{loggedinUser.first_name}}
-                            <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link nav-right" href="/newsfeed">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
             </div>
         </nav>
-        <!-- {{allmessages}}
-    {{allcomments}} -->
+    <div class="row">
+        <div class="col-12 heading">
+        <h3>{{profiletoshow.first_name}} {{profiletoshow.last_name}}</h3>
+        <hr>
+        <h4>Posts</h4>
+        </div>
+    </div>
+        <!-- <div class="message">
+        {% for postObj in myposts%}
+            <p>{{postObj.message_uploader.first_name}} {{postObj.message_uploader.last_name}}: {{postObj.message}}</p>
+        {% endfor%}
+        </div> -->
         <div id="main">
             <div class="row">
                 <div class="col no-padding">
                 </div>
-                <div class="col-6">
+                <div class="col-6 no-padding">
                     <div class="message">
-                        <form action="/postmessage" method="post">
+                        <form action="/profilemessage/{{profiletoshow.id}}" method="post">
                             {% csrf_token %}
                             <p>Create Post</p>
                             <textarea name="postmessage" rows="3" cols="100"
-                                placeholder="What's on your mind, {{loggedinUser.first_name}}?"></textarea>
+                                placeholder="What's on your mind, {{profiletoshow.first_name}}?"></textarea>
                             <hr>
                             <input type="submit" class="btn btn-outline-primary btn-sm" value="Post a message">
                         </form>
                     </div>
-                    <div class="white">
                         <div id="comment">
-                            {% for messageObj in allmessages%}
+                            {% for messageObj in myposts%}
                             <a class="name"
-                                href="/profile/{{messageObj.message_uploader.id}}">{{messageObj.message_uploader.first_name}}
+                                href="/profilecomment/{{messageObj.message_uploader.id}}">{{messageObj.message_uploader.first_name}}
                                 {{messageObj.message_uploader.last_name}}</a>
                             {% if loggedinUser == messageObj.message_uploader %}
                             <ul class="nav nav-pills">
@@ -65,7 +70,7 @@
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                         aria-haspopup="true" aria-expanded="false"></a>
                                     <div class="dropdown-menu">
-                                        <a href="/delete/{{messageObj.id}}">Delete</a>
+                                        <a href="/profile/{{profiletoshow.id}}/deleteprofilepost/{{messageObj.id}}">Delete</a>
                                     </div>
                                 </li>
                             </ul>
@@ -82,24 +87,25 @@
                                     <a class="name"
                                 href="/profile/{{commentObj.comment_uploader.id}}">{{commentObj.comment_uploader.first_name}}
                                 {{commentObj.comment_uploader.last_name}}</a>
-                                    <li>{{commentObj.comment}}</li>
+                                    <li>{{commentObj.comment}} </li>
                                     {% if loggedinUser == commentObj.comment_uploader %}
-                                    <ul class="nav nav-pills">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                                aria-haspopup="true" aria-expanded="false"></a>
-                                            <div class="dropdown-menu">
-                                                <a href="/deletecomment/{{commentObj.id}}">Delete</a>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                                    aria-haspopup="true" aria-expanded="false"></a>
+                                                <div class="dropdown-menu">
+                                                    <a href="/profile/{{profiletoshow.id}}/deleteprofilecomment/{{commentObj.id}}">Delete</a>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     {% endif %}
                                 </div>
                             </ul>
                             {% endif %}
                             {% endfor %}
 
-                            <form action="/postcomment/{{messageObj.id}}" method="post">
+                            <form action="/profile/{{profiletoshow.id}}/comment/{{messageObj.id}}" method="post">
+                            <!-- <form action="/profilecomment/{{messageObj.id}}" method="post"> -->
                                 {% csrf_token %}
                                 <textarea name="postcomment" rows="2" cols="100"
                                     placeholder="Write a comment..."></textarea>
@@ -108,9 +114,8 @@
                             <hr class="space">
                             {% endfor %}
                         </div>
-                    </div>
                 </div>
-                <div class="col">
+                <div class="col no-padding">
                 </div>
             </div>
             <!-- {% for commentObj in allcomments %}
@@ -119,9 +124,6 @@
     {% endfor %} -->
         </div>
     </div>
-    <script type="text/javascript">
-        document.getElementById("id_q").value="{{query}}"
-    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
@@ -131,6 +133,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
+    </div>
 </body>
-
 </html>

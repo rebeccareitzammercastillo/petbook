@@ -67,3 +67,7 @@ footer{
 p.message{
     color: rgb(212, 93, 93);
 }
+
+no-padding{
+    padding:0px;
+}
