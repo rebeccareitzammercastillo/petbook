@@ -1,2 +1,2 @@
 # petbook
-Python Facebook Clone
+Python and Django Facebook Clone
