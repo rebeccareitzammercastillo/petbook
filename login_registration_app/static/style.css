@@ -52,7 +52,7 @@ div.header {
     /* display: inline-block; */
 }
 
-footer{
+/* footer{
     position: fixed;
     left: 0;
     bottom: 0;
@@ -62,7 +62,7 @@ footer{
     text-align: left;
     font-size: 12px;
     padding: 8px 0px 0px 20px;
-}
+} */
 
 p.message{
     color: rgb(212, 93, 93);

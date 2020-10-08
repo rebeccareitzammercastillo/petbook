@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login and Registration</title>
+    <title>Login | Petbook</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">  
@@ -20,7 +20,7 @@
                 <a class="addaccount" href="/newaccount">Add Account</a>
             </div>
             </div>
-            <div class="col no-padding col-12 col-sm-12 col-lg-6">
+            <div class="col no-padding col-6 col-sm-10 col-lg-6">
             <div class="form">
                 <form action="/login" method='post'>
                     {% if messages %}
@@ -65,8 +65,5 @@
             <a href="/newaccount">New Account</a>
         </form>
     </div> -->
-    <footer>
-        <p>Copyright 2020</p>
-    </footer>
 </body>
 </html>
